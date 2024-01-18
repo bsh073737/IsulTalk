@@ -81,14 +81,14 @@
 # 문제 해결
 - 문제
 
-AJAX를 처음 사용 해봐서 상세 글보기를 구현하던 중 AJAX로 받아온 게시글 리스트들 중에서 하나의 게시글을 가져오는 것에서 어려움을 느꼈습니다.
+  AJAX를 처음 사용 해봐서 상세 글보기를 구현하던 중 AJAX로 받아온 게시글 리스트들 중에서 하나의 게시글을 가져오는 것에서 어려움을 느꼈습니다.
 - 해결
 
 클릭 이벤트를 활용해서 선택한 게시글의 board_number를 가져오게 했고 이 때 배운 것을 댓글 구현에서도 활용 했습니다.
 
-
-
+	
 	function getBoardForm(event){
+
 	var clickedRow = event.currentTarget;
 	var board_number = clickedRow.querySelector(".board_number").value;
 	
@@ -102,7 +102,7 @@ AJAX를 처음 사용 해봐서 상세 글보기를 구현하던 중 AJAX로 받
 		        $("#chat").html(result);
 		    }
 			});
-	}
+		}
 
 - 문제
 
@@ -111,7 +111,7 @@ AJAX를 처음 사용 해봐서 상세 글보기를 구현하던 중 AJAX로 받
   mapper에 총 게시글 숫자를 구하는 sql문 중 condition 부분에 값이 들어오지 않았습니다.
 - 해결
   
- #은 실행 시 '#{condition}'이라고 값을 불러오기 때문에 컬럼명을 불러와야하는 이 문장에서는 ${condition}을 사용해서 해결하였습니다.
+  #{}와 ${}의 차이를 찾아보았고 #은 실행 시 '#{condition}'이라고 값을 불러오기 때문에 컬럼명을 불러와야하는 이 문장에서는 ${condition}을 사용해서 해결하였습니다.
   
 		SELECT count(*)
 		FROM csboard
