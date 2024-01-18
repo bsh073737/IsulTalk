@@ -35,6 +35,7 @@
     - 대댓글 기능
     - Cookie를 활용한 중복 조회수 제한
     - 검색 기능
+      
 # 기술 스택
 - **Java 11**
 - **Spring boot 2.7.17**
@@ -70,14 +71,48 @@
 - 수락 버을 누르면 친구 목록에 추가됩니다.
 - 친구와 대화를 할 수 있습니다.
 ---
-  <img src="https://github.com/bsh073737/IsulTalk/assets/149881569/c3d70069-8eb6-427d-b2d4-da91dbfe24b3" width="30%" height="500">
-  <img src="https://github.com/bsh073737/IsulTalk/assets/149881569/38d5e8b4-6673-4523-b1cd-6b35e58b1c9d" width="30%" height="500">
-  <img src="https://github.com/bsh073737/IsulTalk/assets/149881569/ddaf8e74-354f-4187-8392-6b64cec57508" width="30%" height="500">
-![image](https://github.com/bsh073737/IsulTalk/assets/149881569/12257918-1efb-4ece-b76e-293235868eab)
+  <img src="https://github.com/bsh073737/IsulTalk/assets/149881569/a847e2bd-3f05-4226-8b64-9fd02fee6fc2" width="45%" height="500">
+  <img src="https://github.com/bsh073737/IsulTalk/assets/149881569/12257918-1efb-4ece-b76e-293235868eab" width="45%" height="500">
 
 - 게시판에 글을 등록할 수 있고 수정, 삭제가 가능합니다.
 - 작성자와 로그인한 사람이 다르면 수정,삭제 버튼이 숨겨집니다.
+- 게시글 삭제 시 댓글도 같이 삭제됩니다.
+
+# 문제 해결
+- 문제
+
+AJAX를 처음 사용 해봐서 상세 글보기를 구현하던 중 AJAX로 받아온 게시글 리스트들 중에서 하나의 게시글을 가져오는 것에서 어려움을 느꼈습니다.
+- 해결
+
+클릭 이벤트를 활용해서 선택한 게시글의 board_number를 가져오게 했고 이 때 배운 것을 댓글 구현에서도 활용 했습니다.
 
 
 
+	function getBoardForm(event){
+	var clickedRow = event.currentTarget;
+	var board_number = clickedRow.querySelector(".board_number").value;
+	
+		$.ajax({
+		    url : "getBoardForm",
+		    dataType : "text",
+		    type : "get",  
+		    data : {board_number:board_number},   // 호출할 url 에 있는 페이지로 넘길 파라메터
+		    success : function(result){
+				
+		        $("#chat").html(result);
+		    }
+			});
+	}
 
+- 문제
+
+  검색 기능 구현 중 검색 시 페이징이 안되고 1페이지만 뜨는 문제
+  
+  mapper에 총 게시글 숫자를 구하는 sql문 중 condition 부분에 값이 들어오지 않았습니다.
+- 해결
+  
+ #은 실행 시 '#{condition}'이라고 값을 불러오기 때문에 컬럼명을 불러와야하는 이 문장에서는 ${condition}을 사용해서 해결하였습니다.
+  
+		SELECT count(*)
+		FROM csboard
+		WHERE ${condition} LIKE '%'||#{keyword}||'%'
