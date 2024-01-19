@@ -3,34 +3,19 @@
  */
  	
 // 게시판 검색
-	function searchBoardButton() {
+	function searchBoardButton(pageNum) {
 		
 	    var condition = document.getElementById("searchBoardcondition").value;
 	    var keyword = document.getElementById("keyword").value;
-   		csboardView(condition, keyword);
-// 검색용 게시판 리스트
-	function csboardView(condition, keyword) {  
-		console.log();
-	    $.ajax({
-	        url: "csboard",
-	        dataType: "html",
-	        type: "post",
-	        data:{condition:condition, keyword:keyword},
-	        success: function (result) {
-	            $("#chat").html(result);
-	        }
-	        
-	    });
-	}   
+   		csboardView(condition, keyword, pageNum);
 	}
-	
 // 게시판 화면
-	function csboardView(condition, keyword) {
+	function csboardView(condition, keyword, pageNum) {
 	    $.ajax({
 	        url: "csboard",
 	        dataType: "html",
 	        type: "post",
-	        data:{condition:condition, keyword:keyword},
+	        data:{condition:condition, keyword:keyword, pageNum:pageNum},
 	        success: function (result) {
 	            $("#chat").html(result);
 	        }
@@ -108,7 +93,6 @@
 	
 // 글 수정
 	function boardUpdate(){
-		console.log("업데이트 진입")
 		$.ajax({
 			url : "updateBoard",
 			dataType:"html",
@@ -147,12 +131,13 @@
 	}
 	
 // 페이지 넘버 검색해서 띄우기
-function loadPage(pageNum) {
-	
+function loadPage(pageNum, condition, keyword) {
+	 var condition = document.getElementById("searchBoardcondition").value;
+	    var keyword = document.getElementById("keyword").value;
         $.ajax({
             url: "csboard",
             type: 'GET',
-            data: {pageNum:pageNum
+            data: {pageNum:pageNum, condition:condition, keyword:keyword
             },
             success: function (result) {
                 $('#chat').html(result);
@@ -217,7 +202,6 @@ function loadPage(pageNum) {
 			});
 		}else{
 			alert("댓글 작성자만 삭제할 수 있습니다.");
-			console.log(loginId, reply_writer);
 			return false;	
 		}
 	}

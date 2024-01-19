@@ -39,14 +39,16 @@ public class BoardController {
 			@RequestParam(value="condition", defaultValue="board_title") String condition,
 			@RequestParam(value="keyword", defaultValue="") String keyword) {
 		
-		
 		System.out.println("boardList controller");
 
 		System.out.println("con= "+condition +", key= "+keyword);
 		
 		List<BoardDTO> boardList = boardService.getBoardList(cri, condition, keyword);
+		
+		// 뒤로가기 버튼 눌렀을 때 페이지 고정
 		session.setAttribute("keyword", keyword);
 		session.setAttribute("condition", condition);
+		session.setAttribute("getPageNum", cri.getPageNum());
 
 		int total = boardService.totalCnt(condition, keyword);
 
@@ -54,7 +56,8 @@ public class BoardController {
 		System.out.println(boardList);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("paging", pageMaker);
-		System.out.println(cri);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("condition", condition);
 		return "board/csboard";
 
 	}

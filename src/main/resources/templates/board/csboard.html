@@ -29,11 +29,11 @@
 				<tr class="boardSearch" style="text-align: center;">
 					<td colspan="4">
 						<select class="searchBoardcondition" name="searchBoardcondition" id="searchBoardcondition">
-						    <option value="board_title">제목</option>
-						    <option value="board_writer">작성자</option>
-						    <option value="board_content">내용</option>
+					        <option value="board_title" th:selected="${condition == 'board_title'}">제목</option>
+						    <option value="board_writer" th:selected="${condition == 'board_writer'}">작성자</option>
+						    <option value="board_content" th:selected="${condition == 'board_content'}">내용</option>
 				  		</select>
-						<input type="text" class="keyword" id="keyword" name="keyword">
+						<input type="text" class="keyword" id="keyword" name="keyword" th:value="${keyword}">
 						<button type="button" class="button1" style="height: 30px; font-size: small;" onclick="searchBoardButton()">검색</button>
 					</td>
 				</tr>

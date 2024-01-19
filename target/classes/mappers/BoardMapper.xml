@@ -51,7 +51,7 @@
 	<select id="totalCnt" resultType="int">
 		SELECT count(*)
 		FROM csboard
-		WHERE #{condition} LIKE '%'||#{keyword}||'%'
+		WHERE ${condition} LIKE '%'||#{keyword}||'%'
 	</select>
 	
 	<update id="updateReplyCount" parameterType="string">
