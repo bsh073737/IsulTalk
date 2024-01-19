@@ -104,15 +104,3 @@
 			});
 		}
 
-- 문제
-
-  검색 기능 구현 중 검색 시 페이징이 안되고 1페이지만 뜨는 문제
-  
-  mapper에 총 게시글 숫자를 구하는 sql문 중 condition 부분에 값이 들어오지 않았습니다.
-- 해결
-  
-  #{}와 ${}의 차이를 찾아보았고 #은 실행 시 '#{condition}'이라고 값을 불러오기 때문에 컬럼명을 불러와야하는 이 문장에서는 ${condition}을 사용해서 해결하였습니다.
-  
-		SELECT count(*)
-		FROM csboard
-		WHERE ${condition} LIKE '%'||#{keyword}||'%'
