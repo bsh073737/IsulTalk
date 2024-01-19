@@ -25,12 +25,12 @@
 	}
 	
 // 게시판 화면
-	function csboardView(condition, keyword, pageNum) {
+	function csboardView(condition, keyword) {
 	    $.ajax({
 	        url: "csboard",
 	        dataType: "html",
 	        type: "post",
-	        data:{condition:condition, keyword:keyword, pageNum:pageNum},
+	        data:{condition:condition, keyword:keyword},
 	        success: function (result) {
 	            $("#chat").html(result);
 	        }

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.isul.dto.BoardDTO;
 
 @Controller
-@SessionAttributes("loginId")
 public class HomeController {
 	
 	@RequestMapping("/")

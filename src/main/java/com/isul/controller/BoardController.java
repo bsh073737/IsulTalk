@@ -47,15 +47,14 @@ public class BoardController {
 		List<BoardDTO> boardList = boardService.getBoardList(cri, condition, keyword);
 		session.setAttribute("keyword", keyword);
 		session.setAttribute("condition", condition);
-		session.setAttribute("getPageNum", cri.getPageNum());
-		
+
 		int total = boardService.totalCnt(condition, keyword);
 
 		PageMaker pageMaker = new PageMaker(cri, total);
 		System.out.println(boardList);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("paging", pageMaker);
-
+		System.out.println(cri);
 		return "board/csboard";
 
 	}

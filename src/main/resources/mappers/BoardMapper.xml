@@ -16,8 +16,7 @@
 	            SELECT board_number, board_title, board_content, board_writer,
 	                   board_createdate, board_updatedate, reply_count, board_viewcount
 	            FROM csboard
-	            WHERE rownum <= #{cri.pageNum} * #{cri.amount}
-	            AND ${condition} LIKE '%'||#{keyword}||'%'
+	            WHERE ${condition} LIKE '%'||#{keyword}||'%'
 	            ORDER BY board_number DESC
 	        )
 	        WHERE rownum <= (#{cri.pageNum} * #{cri.amount})

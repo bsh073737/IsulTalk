@@ -18,6 +18,26 @@ h3 {
     width: 550px;
     text-align: center;
 }
+.searchBoardKeyword{
+	width: 380px;
+}
+.searchBoardButton {	
+	width : 50px;
+	height : 25px;
+    background-color: #e86479;
+    font-size : 15px;
+    color: #fff;
+    border:none;
+    border-radius:5px;
+    border-width: 0;
+    margin : 5 px;
+}
+.boardSearch{
+    text-align: center;
+    background: white;
+    width: 50px;
+    height: 50px;
+}
 
 /* 글등록 */
 .insertBoard, .updateBoard, .getBoard {
