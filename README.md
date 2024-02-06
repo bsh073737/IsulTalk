@@ -48,12 +48,15 @@ AJAX를 사용해서 최대한 화면 전환이 없는 페이지를 구축하려
 
 
 # 주요 기능
+- ## 로그인
+
 <img src="https://github.com/bsh073737/IsulTalk/assets/149881569/5144d5ec-7451-437f-90fc-fd2244811d3b" width="400" height="500">
 <br>
 
 - 회원가입 시 입력한 아이디, 비밀번호로 로그인할 수 있습니다.
 - 아이디 저장 체크박스를 누르면 아이디가 저장됩니다.
 ---
+- ## 회원가입
   <img src="https://github.com/bsh073737/IsulTalk/assets/149881569/95165204-8320-498c-82e4-146d9ebc2b3c" width="49%" height="600">
   <img src="https://github.com/bsh073737/IsulTalk/assets/149881569/61c16506-fd72-4a0c-9224-9726c3d35ceb" width="50%" height="600">
   <img src="https://github.com/bsh073737/IsulTalk/assets/149881569/eb3cbd1b-51fd-4d73-a883-ad028b677dda" width="49%" height="600">
@@ -64,6 +67,7 @@ AJAX를 사용해서 최대한 화면 전환이 없는 페이지를 구축하려
 - 주소 API를 통해 주소를 입력합니다.
 - 회원가입을 클릭 시 유효성 검사를 합니다.
 ---
+- ## 메인화면
   <img src="https://github.com/bsh073737/IsulTalk/assets/149881569/c3d70069-8eb6-427d-b2d4-da91dbfe24b3" width="49%" height="600">
   <img src="https://github.com/bsh073737/IsulTalk/assets/149881569/38d5e8b4-6673-4523-b1cd-6b35e58b1c9d" width="49%" height="600">
   <img src="https://github.com/bsh073737/IsulTalk/assets/149881569/ddaf8e74-354f-4187-8392-6b64cec57508" width="49%" height="600">
@@ -72,6 +76,7 @@ AJAX를 사용해서 최대한 화면 전환이 없는 페이지를 구축하려
 - 수락 버튼을 누르면 친구 목록에 추가됩니다.
 - 친구와 대화를 할 수 있습니다.
 ---
+- ## 게시판
   <img src="https://github.com/bsh073737/IsulTalk/assets/149881569/a847e2bd-3f05-4226-8b64-9fd02fee6fc2" width="49%" height="600">
   <img src="https://github.com/bsh073737/IsulTalk/assets/149881569/12257918-1efb-4ece-b76e-293235868eab" width="49%" height="600">
 
@@ -79,42 +84,23 @@ AJAX를 사용해서 최대한 화면 전환이 없는 페이지를 구축하려
 - 작성자와 로그인한 사람이 다르면 수정, 삭제 버튼이 숨겨집니다.
 - 게시글 삭제 시 댓글도 같이 삭제됩니다.
 
-# 문제 해결
-- 문제
-
- 비동기 구현을 하면서 오랜 시간 고민했던 부분 중 하나가 AJAX로 받아온 게시글 리스트들 중에서 하나의 게시글의 정보를 어떻게 가져오냐는 것이었습니다.
-- 해결
-
-클릭 이벤트를 활용해서 선택한 게시글의 board_number를 가져오게 했고 이때 배운 것을 댓글 구현에서도 활용했습니다.
-
-	
-	function getBoardForm(event){
-
-	var clickedRow = event.currentTarget;
-	var board_number = clickedRow.querySelector(".board_number").value;
-	
-		$.ajax({
-		    url : "getBoardForm",
-		    dataType : "text",
-		    type : "get",  
-		    data : {board_number:board_number},   // 호출할 url 에 있는 페이지로 넘길 파라메터
-		    success : function(result){
-				
-		        $("#chat").html(result);
-		    }
-			});
-		}
-
 # 배운 점
-이번 프로젝트에서 AJAX를 사용하면서 데이터를 어떤 식으로 전달하는지에 대해서 조금 더 생각해 보게 되었고 
+### 비동기식의 장점
+이번 프로젝트에서 AJAX를 사용하면서 서버와 웹 사이에 데이터를 어떤 식으로 전달하는지에 대해서 조금 더 생각해 보게 되었고 
 
-왜 페이징과 댓글만 비동기식으로 사용하는지 알 것 같았습니다.
+화면을 즉시 띄우는 데 중점을 두다 보니 속도 면에서 많은 향상이 있었습니다.
 
-mybatis를 사용하면서 내가 원하는 정보를 데이터베이스에 가져오기 위해서 어떤 문장을 써야 하는지에 대한 공부가 되었습니다.
+### 데이터베이스의 활용
 
-비동기식 페이징과 검색을 구현하면서 생각보다 잘 안돼서 구현하는 데 오랜 시간이 걸렸습니다.
+mybatis를 사용하면서 내가 원하는 정보를 데이터베이스에서 가져오기 위해서 어떤 문장을 써야 하는지에 대한 것과
 
-이 부분에 대해서 부족함을 느꼈고 복습을 더 해야겠다는 생각이 들었습니다.
+JOIN 문법을 공부하면서 테이블 결합에 대한 공부를 많이 하게 됐습니다.
+
+## 프로젝트 후 느낀 점
+
+비동기식 페이징과 검색을 구현하면서 원하는 정보를 가져오는 것이 생각보다 잘 안돼서 구현하는 데 오랜 시간이 걸렸습니다.
+
+이 부분에 대해서 부족함을 느꼈고 기본적인 것부터 탄탄하게 쌓아야 한다는 것을 느꼈습니다.
 
 
 
